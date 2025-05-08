@@ -6,16 +6,16 @@
 
 **⚙️ Instruções para compilar e executar o jogo:**
 
-    1. Verfique se o seu sistema operacional é Linux ou macOS;
-    2. Verifique se o compilador 'gcc' está instalado;
-          rode no terminal: gcc --version.
-    3. Clone o repositório e entre na pasta:
-           git clone https://github.com/Cecimedeiros/JOGO_DA_FORCA.git
-           cd JOGO_DA_FORCA
-    4. Compile com o Makefile:
+   1. Verfique se o seu sistema operacional é Linux ou macOS;
+   2. Verifique se o compilador 'gcc' está instalado (rode no terminal o comando abaixo):
+         gcc --version.
+   3. Clone o repositório e entre na pasta:
+           git clone https://github.com/Cecimedeiros/Enforcando-a-logica.git
+           cd Enforcando-a-logica
+   4. Compile com o Makefile:
            make
-    5. Execute o programa:
-           ./JOGO_DA_FORCA
+   5. Execute o programa:
+           ./Enforcando-a-logica
 
 **👩‍💻 Como Jogar?**
 
