@@ -7,9 +7,9 @@ EXEC = Enforcando-a-logica
 CC = gcc
 
 # Diretórios e seus respectivos caminhos
-SRC_DIR = projeto-pif/src
-BUILD_DIR = projeto-pif/build
-INCLUDE_DIR = projeto-pif/include
+SRC_DIR = src
+BUILD_DIR = build
+INCLUDE_DIR = include
 
 # Flags de compilação
 CFLAGS = -Wall -g -I$(INCLUDE_DIR)
