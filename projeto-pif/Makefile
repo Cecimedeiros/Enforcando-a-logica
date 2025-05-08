@@ -15,7 +15,7 @@ INCLUDE_DIR = projeto-pif/include
 CFLAGS = -Wall -g -I$(INCLUDE_DIR)
 
 # Arquivos fonte
-SRCS = $(wildcard $(SRC_DIR)/*.c
+SRCS = $(wildcard $(SRC_DIR)/*.c)
 
 # Caminho completo para o executável
 TARGET = $(BUILD_DIR)/$(EXEC)
