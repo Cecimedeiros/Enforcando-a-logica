@@ -1,135 +1,162 @@
 #include "../include/cli-lib.h"
+#include "../include/normalizador.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 #include <ctype.h>
 
-
-#define MAX_WORDS 100
-#define MAX_WORD_SIZE 20
+#define MAX_FRASES 100
 #define MAX_ATTEMPTS 6
 
-
-char** processamento_palavras(const char* filename, int* qtd_palavras){
-    
+char** processamento_palavras(const char* filename, int* qtd_frases) {
     FILE* file = fopen(filename, "r");
-    if (file == NULL){
-        printf("Erro ao abrir frasesOriginais.txt\n");
+    if (file == NULL) {
+        printf("Erro ao abrir %s\n", filename);
         return NULL;
     }
 
-    char **palavras= malloc(100 * sizeof(char*));
-    if (palavras==NULL){
-        printf("Erro de memória.\n");
+    char** frases = malloc(MAX_FRASES * sizeof(char*));
+    if (frases == NULL) {
+        fclose(file);
         return NULL;
     }
-    char buffer[100];
-    while(fgets(buffer, 100, file)){
-        buffer[strcspn(buffer, "\n")]='\0';
-        if (strlen(buffer)==0){
-            continue;
-        }
-        palavras[*qtd_palavras]=malloc(strlen(buffer)+1);
-        strcpy(palavras[*qtd_palavras], buffer);
-        (*qtd_palavras)++;
+
+    char buffer[256];
+    *qtd_frases = 0;
+
+    while (fgets(buffer, sizeof(buffer), file)) {
+        buffer[strcspn(buffer, "\n")] = '\0';
+        if (strlen(buffer) == 0) continue;
+
+        frases[*qtd_frases] = malloc(strlen(buffer) + 1);
+        strcpy(frases[*qtd_frases], buffer);
+        (*qtd_frases)++;
     }
+
     fclose(file);
-    return palavras;
+    return frases;
 }
 
-char* sortear_palavra(const char** words, int count){
-    return (char*) words[rand() % count];
-}
-
-void desenhar_jogo(const char* display, int attempts, const char* wrong_letters, int wins) {
-    printf("Placar: %d\n", wins);
-    printf("Palavra: %s\n", display);
-    printf("Tentativas restantes: %d\n", MAX_ATTEMPTS - attempts);
-    printf("Letras erradas: %s\n", wrong_letters);
-    desenhar_boneco(attempts);
-}
-
-void desenhar_boneco(int attempts){
+void desenhar_boneco(int tentativas) {
     printf("\n");
     printf(" +----+\n");
     printf(" |    |\n");
-    printf(" %c    |\n", (attempts > 0) ? 'O' : ' ');
+    printf(" %c    |\n", (tentativas >= 1) ? 'O' : ' ');
     printf("%c%c%c   |\n",
-           (attempts > 2) ? '/' : ' ',
-           (attempts > 1) ? '|' : ' ',
-           (attempts > 3) ? '\\' : ' ');
-    printf(" %c %c  |\n",
-           (attempts > 4) ? '/' : ' ',
-           (attempts > 5) ? '\\' : ' ');
+        (tentativas >= 3) ? '/' : ' ',
+        (tentativas >= 2) ? '|' : ' ',
+        (tentativas >= 4) ? '\\' : ' ');
+    printf(" %c    |\n", (tentativas >= 5) ? '/' : ' ');
+    printf(" %c    |\n", (tentativas >= 6) ? '\\' : ' ');
     printf("      |\n");
     printf("=========\n");
 }
 
-int jogar_partida(const char* palavra, Jogo* jogo){
-    int tamanho = strlen(palavra);
+void desenhar_jogo(const char* exibicao, int tentativas, const char* erradas, int vitorias) {
+    printf("Placar: %d\n", vitorias);
+    printf("Frase: %s\n", exibicao);
+    printf("Tentativas restantes: %d\n", MAX_ATTEMPTS - tentativas);
+    printf("Letras erradas: %s\n", erradas);
+    desenhar_boneco(tentativas);
+}
+
+int verificar_equivalencia(const char* original, const char* tentativa) {
+    FILE* arquivo = fopen("../frasesEquivalentes.txt", "r");
+    if (!arquivo) return 0;
+
+    char linha_original[256];
+    char linha_equivalente[256];
+
+    while (fgets(linha_original, sizeof(linha_original), arquivo)) {
+        linha_original[strcspn(linha_original, "\n")] = '\0';
+
+        if (fgets(linha_equivalente, sizeof(linha_equivalente), arquivo)) {
+            linha_equivalente[strcspn(linha_equivalente, "\n")] = '\0';
+
+            if (strcmp(original, linha_original) == 0) {
+                fclose(arquivo);
+                return strcmp(tentativa, linha_equivalente) == 0;
+            }
+        }
+    }
+
+    fclose(arquivo);
+    return 0;
+}
+
+int jogar_partida(const char* frase_equivalente, const char* frase_original, Jogo* jogo) {
+    int tamanho = strlen(frase_equivalente);
     char* exibicao = malloc(tamanho + 1);
+
+    int total_para_acertar = 0;
     for (int i = 0; i < tamanho; i++) {
-        exibicao[i] = '_';
+        if (frase_equivalente[i] == ' ' || frase_equivalente[i] == ',' || frase_equivalente[i] == '.' || frase_equivalente[i] == '-') {
+            exibicao[i] = frase_equivalente[i];
+        } else {
+            exibicao[i] = '_';
+            total_para_acertar++;
+        }
     }
     exibicao[tamanho] = '\0';
-    
+
     jogo->tentativas = 0;
     jogo->acertos = 0;
-    char letras_erradas[27] = "";
-    
-    while (jogo->tentativas < MAX_ATTEMPTS && jogo->acertos < tamanho) {
-        system("cls");
-        desenhar_jogo(exibicao, jogo->tentativas, letras_erradas, jogo->vitorias);
-    
+    char erradas[50] = "";
+
+    while (jogo->tentativas < MAX_ATTEMPTS && jogo->acertos < total_para_acertar) {
+        system("cls"); // ou "clear" no Linux/Mac
+        printf("Dica – Frase original:\n%s\n\n", frase_original);
+        desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
+
         printf("\nDigite uma letra: ");
         char tentativa;
         scanf(" %c", &tentativa);
-        tentativa = toupper(tentativa);
-    
-        if (!isalpha(tentativa)) continue;
-    
+        tentativa = tolower(tentativa);
+        char tentativa_normalizada = remover_acento(tentativa);
+
         int ja_usou = 0;
         for (int i = 0; i < tamanho; i++) {
-            if (tentativa == exibicao[i]) {
+            if (tolower(remover_acento(exibicao[i])) == tentativa_normalizada) {
                 ja_usou = 1;
                 break;
             }
         }
-        for (int i = 0; letras_erradas[i] != '\0'; i++) {
-            if (tentativa == letras_erradas[i]) {
+        for (int i = 0; erradas[i] != '\0'; i++) {
+            if (tolower(erradas[i]) == tentativa_normalizada) {
                 ja_usou = 1;
                 break;
             }
         }
         if (ja_usou) continue;
-    
+
         int acertou = 0;
         for (int i = 0; i < tamanho; i++) {
-            if (toupper(palavra[i]) == tentativa) {
-                exibicao[i] = tentativa;
-                acertou = 1;
+            if (remover_acento(tolower(frase_equivalente[i])) == tentativa_normalizada && exibicao[i] == '_') {
+                exibicao[i] = frase_equivalente[i];
                 jogo->acertos++;
+                acertou = 1;
             }
         }
-    
+
         if (!acertou) {
-            int len = strlen(letras_erradas);
-            letras_erradas[len] = tentativa;
-            letras_erradas[len + 1] = '\0';
+            int len = strlen(erradas);
+            erradas[len] = tentativa;
+            erradas[len + 1] = '\0';
             jogo->tentativas++;
         }
     }
-    
+
     system("cls");
-    desenhar_jogo(exibicao, jogo->tentativas, letras_erradas, jogo->vitorias);
+    desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
     free(exibicao);
-    
-    if (jogo->acertos == tamanho) {
-        printf("\nParabéns! Você venceu!\n");
+
+    if (jogo->acertos == total_para_acertar) {
+        printf("\nParabéns! Você acertou a frase equivalente!\n");
         jogo->vitorias++;
+
         return 1;
     } else {
-        printf("\nVocê perdeu! A palavra era: %s\n", palavra);
+        printf("\nVocê perdeu!\nA frase correta era: %s\n", frase_equivalente);
         return -1;
     }
 }

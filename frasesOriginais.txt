@@ -1,0 +1,10 @@
+Se chover, então levarei guarda-chuva
+Não chover ou levarei guarda-chuva
+Se não estudar, então não será aprovado
+Estudar ou não será aprovado
+Não estarei em casa ou não abrirei a porta
+Se estiver em casa, então não abrirei a porta
+Se for feriado, então não haverá aula
+Não for feriado ou não haverá aula
+Se não for verdadeiro, então não é confiável
+For verdadeiro e é confiável
