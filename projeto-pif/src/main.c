@@ -7,12 +7,15 @@
 #define MAX_FRASES 100
 
 int main() {
-    system("chcp 65001 > nul");  
+    #ifdef _WIN32
+    system("chcp 65001 > nul" );
+    #endif
+
     srand(time(NULL));  
 
     int qtd_frases = 0;
-    char** originais = processamento_palavras("../frasesOriginais.txt", &qtd_frases);
-    char** equivalentes = processamento_palavras("../frasesEquivalentes.txt", &qtd_frases);
+    char** originais = processamento_palavras("frasesOriginais.txt", &qtd_frases);
+    char** equivalentes = processamento_palavras("frasesEquivalentes.txt", &qtd_frases);
 
     if (originais == NULL || equivalentes == NULL || qtd_frases == 0) {
         printf("Erro ao carregar as frases. Verifique os arquivos .txt\n");
