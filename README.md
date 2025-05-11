@@ -7,8 +7,10 @@
 **⚙️ Instruções para compilar e executar o jogo:**
 
    1. Verfique se o seu sistema operacional é Linux ou macOS;
+        obs: Se for Windows, será necessário instalar WSL(Windos Subsystem for Linux) e o Ubuntu;
    2. Verifique se o compilador 'gcc' está instalado (rode no terminal o comando abaixo):
          gcc --version.
+        obs: Caso não esteja, é necessário instalar.
    3. Clone o repositório e entre na pasta:
            git clone https://github.com/Cecimedeiros/Enforcando-a-logica.git
            cd Enforcando-a-logica
@@ -17,10 +19,12 @@
    5. Execute o programa:
            ./Enforcando-a-logica
 
+        
+
 **👩‍💻 Como Jogar?**
 
   Para jogar, você irá acessar o jogo por meio das instruções acima. No início, será apresentada a frase original e, então, o usuário digitará a frase equivalente. Dessa forma, o objetivo do jogo é descobrir a equivalência lógica (em linguagem natural) da frase original. Para isso, o usuário praticará seus conhecimentos nesse assunto. 
-  Ademais, o usuário tem direito a uma dica para auxiliar na resolução. A cada tentativa errada, uma parte do corpo do boneco é direcionada à forca, totalizando seis chances. Se o jogador acertar a equivalência, vencerá a rodada e poderá decidir se encerra o programa ou continua a jogar.
+  Ademais, o jogador tem direito a uma dica para auxiliar na resolução. A cada tentativa errada, uma parte do corpo do boneco é direcionada à forca, totalizando seis chances. Se o jogador acertar a equivalência, vencerá a rodada e poderá decidir se encerra o programa ou continua a jogar.
 
 **⚠️ Regras:**
 
