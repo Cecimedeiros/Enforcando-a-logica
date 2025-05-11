@@ -11,6 +11,7 @@ typedef struct {
 #include <string.h>
 #include <stdlib.h>
 
+
 char** processamento_palavras(const char* filename, int* qtdpalavras);
 char* sortear_palavra(const char** words, int count);
 void desenhar_jogo(const char* display, int attempts, const char* wrong_letters, int wins);

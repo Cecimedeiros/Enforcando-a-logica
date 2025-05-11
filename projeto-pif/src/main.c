@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <ctype.h>
 #include "../include/cli-lib.h"
+#include "timer.h"
 
 #define MAX_FRASES 100
 
@@ -10,8 +10,6 @@ int main() {
     #ifdef _WIN32
     system("chcp 65001 > nul" );
     #endif
-
-    srand(time(NULL));  
 
     int qtd_frases = 0;
     char** originais = processamento_palavras("frasesOriginais.txt", &qtd_frases);
@@ -27,13 +25,13 @@ int main() {
     jogo.vitorias = 0;
 
     while (!sair) {
+        
         int indice = rand() % qtd_frases;
         char* frase_original = originais[indice];
         char* frase_equivalente = equivalentes[indice];
 
-        printf("\nProposição lógica: %s\n", frase_original);
-        printf("Tente adivinhar sua forma equivalente jogando forca!\n");
-
+        printf("\n🩻 ENFORCANDO A LÓGICA: Acerte a frase equivalente da original jogando forca!\n");
+        
         int resultado = jogar_partida(frase_equivalente, frase_original, &jogo);
 
         if (resultado == 1) {

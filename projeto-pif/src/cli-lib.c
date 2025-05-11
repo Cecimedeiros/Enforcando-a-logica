@@ -53,10 +53,11 @@ void desenhar_boneco(int tentativas) {
 }
 
 void desenhar_jogo(const char* exibicao, int tentativas, const char* erradas, int vitorias) {
-    printf("Placar: %d\n", vitorias);
-    printf("Frase: %s\n", exibicao);
-    printf("Tentativas restantes: %d\n", MAX_ATTEMPTS - tentativas);
+    printf("Pontos: %d\n", vitorias);
     printf("Letras erradas: %s\n", erradas);
+    printf("Tentativas restantes: %d\n", MAX_ATTEMPTS - tentativas);
+    printf("Frase: %s\n", exibicao);
+    
     desenhar_boneco(tentativas);
 }
 
@@ -104,8 +105,8 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
     char erradas[50] = "";
 
     while (jogo->tentativas < MAX_ATTEMPTS && jogo->acertos < total_para_acertar) {
-        system("cls"); // ou "clear" no Linux/Mac
-        printf("Dica – Frase original:\n%s\n\n", frase_original);
+        system("cls");
+        printf("Frase original: %s\n\n", frase_original);
         desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
 
         printf("\nDigite uma letra: ");
