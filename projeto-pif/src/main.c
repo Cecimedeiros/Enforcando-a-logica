@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "../include/cli-lib.h"
-#include "timer.h"
+#include "../include/tempo.h"
+#include "../include/screen.h"
 
 #define MAX_FRASES 100
 
@@ -10,6 +11,9 @@ int main() {
     #ifdef _WIN32
     system("chcp 65001 > nul" );
     #endif
+
+
+    screenSetColor(YELLOW, BLACK);
 
     int qtd_frases = 0;
     char** originais = processamento_palavras("frasesOriginais.txt", &qtd_frases);
@@ -30,10 +34,9 @@ int main() {
         char* frase_original = originais[indice];
         char* frase_equivalente = equivalentes[indice];
 
-        printf("\n🩻 ENFORCANDO A LÓGICA: Acerte a frase equivalente da original jogando forca!\n");
         
         int resultado = jogar_partida(frase_equivalente, frase_original, &jogo);
-
+        
         if (resultado == 1) {
             printf("Muito bem! Você descobriu a proposição equivalente.\n");
         } else {
