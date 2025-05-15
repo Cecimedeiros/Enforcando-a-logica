@@ -13,3 +13,9 @@ Se não passar na prova, então não estudou
 Não beber ou não dirija
 Se não descansar, então não estava cansado
 Se não for penalizado, então não faltou
+Se estudar, então não irá mal na prova.
+Não correr ou chega a tempo.
+Não mentir ou perderá a confiança.
+Se não ficar mais saudável, então não foi à academia.
+Se não sairmos, então choveu.
+Pedro é confiável ou João é honesto.
