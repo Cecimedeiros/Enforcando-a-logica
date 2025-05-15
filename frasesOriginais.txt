@@ -13,3 +13,9 @@ Se estudar, então passará na prova
 Se beber, então não dirija
 Se estiver cansado, então descanse
 Se faltar, então será penalizado
+Não estude ou não vá mal na prova
+Se correr, então chega a tempo
+Se mentir, então perderá a confiança
+Se for à academia, então ficará mais saudável
+Se não chover, então sairemos
+João é honesto ou Pedro é confiável
