@@ -8,3 +8,8 @@ Não for feriado ou não haverá aula
 Se for feriado, então não haverá aula
 Se for confiável, então é verdadeiro
 Se mentir, então não é confiável
+Se não levar guarda-chuva, então não choveu
+Se não passar na prova, então não estudou
+Não beber ou não dirija
+Se não descansar, então não estava cansado
+Se não for penalizado, então não faltou
