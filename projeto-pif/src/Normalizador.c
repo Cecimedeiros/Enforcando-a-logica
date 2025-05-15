@@ -1,8 +1,5 @@
 #include <ctype.h>
-#include "../include/normalizador.h"
-
-
-
+#include "../include/Normalizador.h"
 
 char remover_acento(char c) {
     switch ((unsigned char)c) {

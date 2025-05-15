@@ -1,19 +1,18 @@
-#include "../include/cli-lib.h"
-#include "../include/normalizador.h"
-#include "../include/tempo.h"
+#include "../include/Forca.h"
+#include "../include/Normalizador.h"
+#include "../include/Timer.h"
+#include "../include/Screen.h"
+#include "../include/Keyboard.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "screen.h"
-
-int x= 5, y=5, largura= 30, altura= 10;
-
-#include <pthread.h>
-#include <unistd.h>
 
 #define MAX_FRASES 100
 #define MAX_ATTEMPTS 6
+
+int x= 5, y=5, largura= 40, altura= 20;
+
 
 char** processamento_palavras(const char* filename, int* qtd_frases) {
     FILE* file = fopen(filename, "r");
@@ -45,7 +44,7 @@ char** processamento_palavras(const char* filename, int* qtd_frases) {
 }
 
 void desenhar_boneco(int tentativas) {
-
+    
     printf("\n");
     printf(" +----+\n");
     printf(" |    |\n");
@@ -59,11 +58,14 @@ void desenhar_boneco(int tentativas) {
         (tentativas >= 6) ? '\\' : ' ');
     printf("      |\n");
     printf("=========\n");
+
+
 }
 
 void desenhar_jogo(const char* exibicao, int tentativas, const char* erradas, int vitorias) {
-    
+       
     desenhar_boneco(tentativas);
+
     printf("\nPontos: %d\n", vitorias);
     printf("Letras erradas: %s\n", erradas);
     printf("Chances restante de errar: %d\n", MAX_ATTEMPTS - tentativas);
@@ -115,22 +117,35 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
     jogo->acertos = 0;
     char erradas[50] = "";
     
-    iniciar_cronometro(120);
-    tempo_ativo = 1;  
-    pthread_t thread_tempo;
-    pthread_create(&thread_tempo, NULL, atualizar_tempo, NULL);
-
+    timerInit(120000);
     while (jogo->tentativas < MAX_ATTEMPTS && jogo->acertos < total_para_acertar) {
         
-        screenClear();
+        if (timerTimeOver()) {
+            screenClear();
+            printf("\n⏰ O tempo acabou!\n");
+            free(exibicao);
+        return -1; 
+        }
 
+        screenClear();
         printf("\n🩻 ENFORCANDO A LÓGICA: Acerte a frase equivalente da original jogando forca!\n");
         printf("\nFrase original: %s\n\n", frase_original);
+        int tempo_restante = 120000 - getTimeDiff();
+        printf("⏱ Tempo restante: %d segundos\n", tempo_restante / 1000);
+
         desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
 
-
         char tentativa;
-        scanf(" %c", &tentativa);
+        while (!keyhit());
+        tentativa = readch();
+
+        if (tentativa == '.') {
+            printf("\nVocê saiu do jogo.\n");
+            screenDestroy();
+            keyboardDestroy();
+            exit(0); 
+        }
+
         tentativa = tolower(tentativa);
         char tentativa_normalizada = remover_acento(tentativa);
 
@@ -165,22 +180,20 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
             jogo->tentativas++;
         }
     }
-    tempo_ativo = 0; 
-    pthread_join(thread_tempo, NULL);
-
+    
     screenClear();
     desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
     free(exibicao);
 
     if (jogo->acertos == total_para_acertar) {
         screenClear();
-        printf("\nParabéns! Você acertou a frase equivalente!\n");
+        printf("\nParabéns! Você acertou a frase equivalente!👏\n");
         jogo->vitorias++;
 
         return 1;
     } else {
         screenClear();
-        printf("\nVocê perdeu!\n");
+        printf("\nVá estudar, viu?! 🫨🩻\n");
         return -1;
     }
 

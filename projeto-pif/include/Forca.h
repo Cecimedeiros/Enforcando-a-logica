@@ -1,5 +1,5 @@
-#ifndef CLI_LIB_H
-#define CLI_LIB_H
+#ifndef FORCA_H
+#define FORCA_H
 
 typedef struct {
     int tentativas;
