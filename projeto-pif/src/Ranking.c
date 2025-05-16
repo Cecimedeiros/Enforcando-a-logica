@@ -35,8 +35,8 @@ void exibir_ranking() {
     if (arquivo == NULL) {
         printf("Ranking ainda não disponível.\n");
         printf("\nPressione ENTER para continuar...");
-        getchar(); // Limpa o buffer
-        getchar(); // Aguarda o ENTER
+        getchar(); 
+        getchar();
         return;
     }
     
@@ -57,28 +57,7 @@ void exibir_ranking() {
     fclose(arquivo);
     
     printf("\nPressione ENTER para continuar...");
-    getchar(); // Limpa o buffer
-    getchar(); // Aguarda o ENTER
-
-    /*char* nomearq= "ranking.txt";
-    FILE *arquivo = fopen(nomearq, "r");
-    
-    if (arquivo == NULL) {
-        printf("Erro ao abrir %s\n", nomearq);
-    }
-
-    Jogador jogador;
-    int entrou= 0;
-
-    printf("\n===== RANKING =====\n");
-        
-    while (fscanf(arquivo, "%s %d", jogador.nome, &jogador.pontos) == 2) {
-        printf("%s - %d pontos\n", jogador.nome, jogador.pontos);
-        entrou=1;
-    }
-    if (!entrou) {
-        printf("Nenhum jogador encontrado no ranking.\n");
-    }
-    fclose(arquivo);*/
+    getchar(); 
+    getchar(); 
 
 }
