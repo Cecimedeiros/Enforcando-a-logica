@@ -1,4 +1,7 @@
 #include "../include/Screen.h"
+#include <stdio.h>
+#include <string.h>
+
 
 void screenDrawBorders() 
 {
@@ -56,6 +59,11 @@ void screenDestroy()
     screenClear();
     screenHomeCursor();
     screenShowCursor();
+}
+
+void screenPrintCenter(const char* text) {
+    int length = strlen(text);
+    printf("%s", text);
 }
 
 void screenGotoxy(int x, int y)

@@ -1,0 +1,6 @@
+laura 1
+cata 1
+lucas 1
+
+linda 0
+paula 0

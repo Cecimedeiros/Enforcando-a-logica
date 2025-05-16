@@ -13,7 +13,6 @@
 
 int x= 5, y=5, largura= 40, altura= 20;
 
-
 char** processamento_palavras(const char* filename, int* qtd_frases) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
@@ -43,33 +42,52 @@ char** processamento_palavras(const char* filename, int* qtd_frases) {
     return frases;
 }
 
-void desenhar_boneco(int tentativas) {
-    
-    printf("\n");
-    printf(" +----+\n");
-    printf(" |    |\n");
-    printf(" %c    |\n", (tentativas >= 1) ? 'O' : ' ');
-    printf("%c%c%c   |\n",
+void desenhar_boneco(int tentativas, int x, int y) {
+     
+    screenGotoxy(x, y);     printf(" +----+");
+    screenGotoxy(x, y + 1); printf(" |    |");
+    screenGotoxy(x, y + 2); printf(" %c    |", (tentativas >= 1) ? 'O' : ' ');
+    screenGotoxy(x, y + 3); printf("%c%c%c   |",
         (tentativas >= 3) ? '/' : ' ',
         (tentativas >= 2) ? '|' : ' ',
         (tentativas >= 4) ? '\\' : ' ');
-    printf("%c %c   |\n",
+    screenGotoxy(x, y + 4); printf("%c %c   |",
         (tentativas >= 5) ? '/' : ' ',
         (tentativas >= 6) ? '\\' : ' ');
-    printf("      |\n");
-    printf("=========\n");
-
+    screenGotoxy(x, y + 5); printf("      |");
+    screenGotoxy(x, y + 6); printf("=========\n");
 
 }
 
 void desenhar_jogo(const char* exibicao, int tentativas, const char* erradas, int vitorias) {
-       
-    desenhar_boneco(tentativas);
+     
+    
+    int x = 10;
+    int y = 6;
 
-    printf("\nPontos: %d\n", vitorias);
-    printf("Letras erradas: %s\n", erradas);
-    printf("Chances restante de errar: %d\n", MAX_ATTEMPTS - tentativas);
-    printf("\nFrase equivalente: %s\n\n", exibicao);
+    screenGotoxy(x + 20, y);
+    printf("=== JOGO DA FORCA ===");
+
+    desenhar_boneco(tentativas, x + 25, y + 2);
+
+    screenGotoxy(x, y + 10);
+    printf("Pontos: %d", vitorias);
+
+    screenGotoxy(x, y + 12);
+    printf("Letras erradas: %s", erradas);
+
+    screenGotoxy(x, y + 14);
+    printf("Chances restantes: %d", MAX_ATTEMPTS - tentativas);
+
+    screenGotoxy(x, y + 16);
+    printf("Frase equivalente:");
+
+    int len = strlen(exibicao);
+    int centro = (MAXX + MINX - len) / 2;
+    screenGotoxy(centro, y + 17);
+    for (int i = 0; i < len && i < (MAXX - MINX - 2); i++) {
+        putchar(exibicao[i]);
+    }
     
 }
 
@@ -118,34 +136,49 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
     char erradas[50] = "";
     
     timerInit(120000);
+    screenInit(0);       
+    screenDrawBorders();
     while (jogo->tentativas < MAX_ATTEMPTS && jogo->acertos < total_para_acertar) {
         
-        if (timerTimeOver()) {
-            screenClear();
-            printf("\n⏰ O tempo acabou!\n");
-            free(exibicao);
-        return -1; 
-        }
+        int largura_tela = 80; 
+        int centro = largura_tela / 2;
 
-        screenClear();
-        printf("\n🩻 ENFORCANDO A LÓGICA: Acerte a frase equivalente da original jogando forca!\n");
-        printf("\nFrase original: %s\n\n", frase_original);
+        screenGotoxy(centro - 15, 1);
+        printf("🧠 ENFORCANDO A LÓGICA");
+
+        screenGotoxy(centro - 28, 2);
+        printf("Acerte a frase equivalente da original jogando forca!");
+         
+        screenGotoxy(centro - (strlen(frase_original) / 2), 3);
+        printf("Frase original: %s", frase_original);
+
         int tempo_restante = 120000 - getTimeDiff();
-        printf("⏱ Tempo restante: %d segundos\n", tempo_restante / 1000);
+        screenGotoxy(centro - 15, 4);
+        printf("⏱ Tempo restante: %d segundos", tempo_restante / 1000);
 
+        //screenClear();
+        
         desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
 
+        if (timerTimeOver()) {
+            screenClear();
+            screenGotoxy(centro - 15, 4);
+            printf("\n⏰ O tempo acabou!\n");
+            free(exibicao);
+            return -1; 
+        }
         char tentativa;
-        while (!keyhit());
-        tentativa = readch();
+        screenGotoxy(10, MAXY - 3);  
+        printf("Digite uma letra (ou '.' para sair): ");
+        scanf(" %c", &tentativa);
 
         if (tentativa == '.') {
-            printf("\nVocê saiu do jogo.\n");
+            screenGotoxy(10, MAXY - 2);
+            printf("Você saiu do jogo.\n");
             screenDestroy();
             keyboardDestroy();
             exit(0); 
         }
-
         tentativa = tolower(tentativa);
         char tentativa_normalizada = remover_acento(tentativa);
 
