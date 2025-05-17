@@ -160,7 +160,6 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
 
         if (timerTimeOver()) {
             screenClear();
-            //screenGotoxy(centro - 15, 4);
             screenInit(0);       
             screenDrawBorders();
             screenGotoxy(30, MAXY - 20);

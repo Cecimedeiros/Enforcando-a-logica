@@ -1,4 +1,4 @@
-## 🩻 JOGO: ENFORCANDO A LÓGICA
+## 🧠 JOGO: ENFORCANDO A LÓGICA
 
 **Descrição:**
 
