@@ -1,6 +1,27 @@
 laura 1
 cata 1
 lucas 1
-
 linda 0
 paula 0
+helena 1
+zé 0
+
+tay 0
+filipe 1
+cecilia 0
+gui 1
+isabella 0
+Beatriz 1
+mel 0
+kaka 1
+julia 1
+andre 1
+daniel 1
+suzanna 0
+deda 0
+lau 0
+jo 0
+s 0
+go 1
+cecili 0
+erica 0

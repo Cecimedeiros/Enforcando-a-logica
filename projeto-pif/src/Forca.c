@@ -155,15 +155,16 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
         int tempo_restante = 120000 - getTimeDiff();
         screenGotoxy(centro - 15, 4);
         printf("⏱ Tempo restante: %d segundos", tempo_restante / 1000);
-
-        //screenClear();
         
         desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
 
         if (timerTimeOver()) {
             screenClear();
-            screenGotoxy(centro - 15, 4);
-            printf("\n⏰ O tempo acabou!\n");
+            //screenGotoxy(centro - 15, 4);
+            screenInit(0);       
+            screenDrawBorders();
+            screenGotoxy(30, MAXY - 20);
+            printf("⏰ O tempo acabou!");
             free(exibicao);
             return -1; 
         }
@@ -219,14 +220,21 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
     free(exibicao);
 
     if (jogo->acertos == total_para_acertar) {
+
         screenClear();
-        printf("\nParabéns! Você acertou a frase equivalente!👏\n");
+        screenInit(0);       
+        screenDrawBorders();
+        screenGotoxy(30, MAXY - 20);
+        printf("Continue assim!👏");
         jogo->vitorias++;
 
         return 1;
     } else {
         screenClear();
-        printf("\nVá estudar, viu?! 🫨🩻\n");
+        screenInit(0);       
+        screenDrawBorders();
+        screenGotoxy(28, MAXY - 20);
+        printf("Vá estudar, viu?! 🫨🩻");
         return -1;
     }
 

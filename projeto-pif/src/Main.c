@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <time.h>
 #include "../include/Forca.h"
 #include "../include/Timer.h"
 #include "../include/Screen.h"
@@ -15,6 +16,8 @@ int main() {
     #endif
     
     screenSetColor(YELLOW, BLACK);
+
+    srand(time(NULL));
 
     int opcao;
 
@@ -46,6 +49,10 @@ int main() {
                 char nome[50];
                 int pontos = 0;
 
+                int largura_tela = 80; 
+                int centro = largura_tela / 2;
+
+                screenGotoxy(centro - 10, 18);
                 printf("Digite seu nome: ");
                 scanf("%s", nome);
 
@@ -55,18 +62,22 @@ int main() {
 
                 
                 int resultado = jogar_partida(frase_equivalente, frase_original, &jogo);
-                screenGotoxy(5, MAXY - 4);
+                int x_frase = (MAXX - strlen(frase_equivalente)) / 2;
+                int y_frase = MAXY - 14;
+
                 if (resultado == 1) {
-                    printf("Muito bem! Você descobriu a proposição equivalente.\n");
+                    screenGotoxy(20, MAXY - 14);
+                    printf("🏆 Você acertou a frase equivalente! 🏆");
                     pontos +=1;          
                        
                 } else {
-                    printf("A proposição correta era: %s\n", frase_equivalente);
+                    screenGotoxy(x_frase, y_frase);
+                    printf("A proposição correta era: %s", frase_equivalente);
                     pontos= 0;
                 }
                 salvar_pontuacao(nome,pontos);   
-                screenGotoxy(5, MAXY - 2);
-                printf("\nDeseja jogar novamente? (S/N): ");
+                screenGotoxy(20, MAXY - 6);
+                printf("🔎 Deseja jogar novamente? (S/N): ");
                 char resposta;
                 scanf(" %c", &resposta);
                 if (toupper(resposta) != 'S') {

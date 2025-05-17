@@ -3,15 +3,31 @@
 #include <string.h>
 #include "../include/Ranking.h"
 #include "../include/Keyboard.h"
+#include "../include/Screen.h"
 
 
 int exibir_menu() {
+    screenInit(0);
+    screenDrawBorders();
+
+    int largura_tela = 80; 
+    int centro = largura_tela / 2;
     int opcao;
-    printf("===== MENU PRINCIPAL =====\n");
-    printf("1 - Jogar\n");
-    printf("2 - Ver Ranking\n");
-    printf("3 - Sair\n");
-    printf("Escolha uma opção: ");
+
+    screenGotoxy(centro - 12, 4);
+    printf(" 🧠 MENU PRINCIPAL 🧠 ");
+
+    screenGotoxy(centro - 10, 8);
+    printf("[1] 👩‍💻 Jogar ");
+
+    screenGotoxy(centro - 12, 10);
+    printf("[2] 📊 Ver Ranking ");
+
+    screenGotoxy(centro - 9, 12);
+    printf("[3] 👣 Sair ");
+
+    screenGotoxy(centro - 12, 16);
+    printf(" Escolha uma opção: ");
     scanf("%d", &opcao);
 
     return opcao;
@@ -28,13 +44,15 @@ void salvar_pontuacao(char nome[], int pontos) {
 }
 
 void exibir_ranking() {
-
+    screenClear();
+    screenInit(0);
+    screenDrawBorders();
     char* nomearq = "ranking.txt";
     FILE *arquivo = fopen(nomearq, "r");
     
     if (arquivo == NULL) {
         printf("Ranking ainda não disponível.\n");
-        printf("\nPressione ENTER para continuar...");
+        printf("\n➡️ Pressione ENTER para continuar...");
         getchar(); 
         getchar();
         return;
@@ -42,21 +60,38 @@ void exibir_ranking() {
     
     Jogador jogador;
     int entrou = 0;
+
+    int largura_tela = 80; 
+    int centro = largura_tela / 2;
+    int linha = 6;
     
-    printf("\n===== RANKING =====\n");
+    screenGotoxy(centro - 12, 4);
+    printf("===== 🏆 RANKING 🏆 =====");
     
     while (fscanf(arquivo, "%s %d", jogador.nome, &jogador.pontos) == 2) {
-        printf("%s - %d pontos\n", jogador.nome, jogador.pontos);
+        char linha_texto[100];
+        
+        snprintf(linha_texto, sizeof(linha_texto), "%s - %d pontos", jogador.nome, jogador.pontos);
+
+        int tam = strlen(linha_texto);
+        int pos_x = centro - tam / 2;
+
+        screenGotoxy(pos_x, linha);
+        printf("%s", linha_texto);
+
+        linha++;
+
         entrou = 1;
     }
     
     if (!entrou) {
-        printf("Nenhum jogador encontrado no ranking.\n");
+        screenGotoxy(centro - 17, 10);
+        printf("❌ Nenhum jogador encontrado no ranking! ");
     }
     
     fclose(arquivo);
-    
-    printf("\nPressione ENTER para continuar...");
+    screenGotoxy(centro - 17, 18);
+    printf("➡️ Pressione ENTER para continuar...");
     getchar(); 
     getchar(); 
 
