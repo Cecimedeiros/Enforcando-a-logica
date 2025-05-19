@@ -69,11 +69,15 @@ int main() {
                     screenGotoxy(20, MAXY - 14);
                     printf("🏆 Você acertou a frase equivalente! 🏆");
                     pontos +=1;          
-                       
-                } else {
-                    screenGotoxy(x_frase, y_frase);
-                    printf("A proposição correta era: %s", frase_equivalente);
-                    pontos= 0;
+                }
+                else {
+                    char msg[256];
+                    sprintf(msg, "A proposição correta era: %s", frase_equivalente);
+
+                    screenGotoxy(5, MAXY - 13);
+                    printf("%s", msg);
+
+                    pontos = 0;
                 }
                 salvar_pontuacao(nome,pontos);   
                 screenGotoxy(20, MAXY - 6);
