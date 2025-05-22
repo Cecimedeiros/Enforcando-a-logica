@@ -1,7 +1,6 @@
 #include <ctype.h>
 #include "../include/Normalizador.h"
 
-// versão simples (para ASCII ou Latin-1)
 char remover_acento(char c) {
     switch ((unsigned char)c) {
         case 0xE1: case 0xE0: case 0xE2: case 0xE3: case 0xE4:
@@ -26,7 +25,6 @@ char remover_acento(char c) {
     }
 }
 
-// nova versão UTF-8
 char remover_acento_utf8(unsigned char c1, unsigned char c2) {
     if (c1 == 0xC3) {
         switch (c2) {
@@ -52,8 +50,6 @@ char remover_acento_utf8(unsigned char c1, unsigned char c2) {
     }
     return 0; 
 }
-
-
 
 void normalizar(const char* entrada, char* saida) {
     int i = 0;

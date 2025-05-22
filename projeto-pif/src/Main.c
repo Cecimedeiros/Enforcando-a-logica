@@ -6,21 +6,14 @@
 #include "../include/Forca.h"
 #include "../include/Timer.h"
 #include "../include/Screen.h"
-#include "../include/Keyboard.h"
 #include "../include/Ranking.h"
 
 #define MAX_FRASES 100
 
 int main() {
     setlocale(LC_ALL, "");  
-
-    #ifdef _WIN32
-    system("chcp 65001 > nul");
-    #endif
-
-    
+  
     screenSetColor(YELLOW, BLACK);
-
     srand(time(NULL));
 
     int opcao;
@@ -43,9 +36,7 @@ int main() {
 
     while (!sair) {
         
-        screenClear();     
-        screenSetColor(YELLOW, BLACK);
-
+        screenClear();
         opcao = exibir_menu();
 
         switch(opcao) {
@@ -60,37 +51,37 @@ int main() {
                 printf("Digite seu nome: ");
                 scanf("%s", nome);
 
-                int indice = rand() % qtd_frases;
-                char* frase_original = originais[indice];
-                char* frase_equivalente = equivalentes[indice];
-
-                
-                int resultado = jogar_partida(frase_equivalente, frase_original, &jogo);
-                int x_frase = (MAXX - strlen(frase_equivalente)) / 2;
-                int y_frase = MAXY - 14;
-
-                if (resultado == 1) {
-                    screenGotoxy(20, MAXY - 14);
-                    printf("🏆 Você acertou a frase equivalente! 🏆");
-                    pontos +=1;          
-                }
-                else {
-                    char msg[256];
-                    sprintf(msg, "A proposição correta era: %s", frase_equivalente);
-
-                    screenGotoxy(5, MAXY - 13);
-                    printf("%s", msg);
-
-                    pontos = 0;
-                }
-                salvar_pontuacao(nome,pontos);   
-                screenGotoxy(20, MAXY - 6);
-                printf("🔎 Deseja jogar novamente? (S/N): ");
                 char resposta;
-                scanf(" %c", &resposta);
-                if (toupper(resposta) != 'S') {
-                    sair = 1;
-                }
+                do{
+
+                    int indice = rand() % qtd_frases;
+                    char* frase_original = originais[indice];
+                    char* frase_equivalente = equivalentes[indice];
+
+                    int resultado = jogar_partida(frase_equivalente, frase_original, &jogo);
+
+                    if (resultado == 1) {
+                        screenGotoxy(20, MAXY - 14);
+                        printf("🏆 Você acertou a frase equivalente! 🏆");
+                        pontos +=1;          
+                    }
+                    else {
+                        char msg[256];
+                        sprintf(msg, "A proposição correta era: %s", frase_equivalente);
+
+                        screenGotoxy(5, MAXY - 13);
+                        printf("%s", msg);
+
+                        pontos = 0;
+                    }
+                    salvar_pontuacao(nome,pontos);   
+
+                    screenGotoxy(20, MAXY - 6);
+                    printf("🔎 Deseja jogar novamente? (S/N): ");
+                    scanf(" %c", &resposta);
+                    
+                }while (toupper(resposta)=='S');
+                
                 break;
             }
             case 2:{

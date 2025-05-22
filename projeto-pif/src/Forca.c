@@ -2,17 +2,13 @@
 #include "../include/Normalizador.h"
 #include "../include/Timer.h"
 #include "../include/Screen.h"
-#include "../include/Keyboard.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
-
 #define MAX_FRASES 100
 #define MAX_ATTEMPTS 6
-
-int x= 5, y=5, largura= 40, altura= 20;
 
 char** processamento_palavras(const char* filename, int* qtd_frases) {
     FILE* file = fopen(filename, "r");
@@ -62,7 +58,6 @@ void desenhar_boneco(int tentativas, int x, int y) {
 
 void desenhar_jogo(const char* exibicao, int tentativas, const char* erradas, int vitorias) {
      
-    
     int x = 10;
     int y = 6;
 
@@ -90,30 +85,6 @@ void desenhar_jogo(const char* exibicao, int tentativas, const char* erradas, in
         putchar(exibicao[i]);
     }
     
-}
-
-int verificar_equivalencia(const char* original, const char* tentativa) {
-    FILE* arquivo = fopen("../frasesEquivalentes.txt", "r");
-    if (!arquivo) return 0;
-
-    char linha_original[256];
-    char linha_equivalente[256];
-
-    while (fgets(linha_original, sizeof(linha_original), arquivo)) {
-        linha_original[strcspn(linha_original, "\n")] = '\0';
-
-        if (fgets(linha_equivalente, sizeof(linha_equivalente), arquivo)) {
-            linha_equivalente[strcspn(linha_equivalente, "\n")] = '\0';
-
-            if (strcmp(original, linha_original) == 0) {
-                fclose(arquivo);
-                return strcmp(tentativa, linha_equivalente) == 0;
-            }
-        }
-    }
-
-    fclose(arquivo);
-    return 0;
 }
 
 int jogar_partida(const char* frase_equivalente, const char* frase_original, Jogo* jogo) {
@@ -152,8 +123,7 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
     jogo->acertos = 0;
     
     timerInit(120000);
-    screenInit(0);
-    screenDrawBorders();
+    screenInit(1);
 
     while (jogo->tentativas < MAX_ATTEMPTS && jogo->acertos < total_para_acertar) {
         int largura_tela = 80;
@@ -175,9 +145,7 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
         desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
 
         if (timerTimeOver()) {
-            screenClear();
-            screenInit(0);
-            screenDrawBorders();
+            screenInit(1);
             screenGotoxy(30, MAXY - 20);
             printf("⏰ O tempo acabou!");
             free(exibicao);
@@ -195,7 +163,6 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
             screenGotoxy(10, MAXY - 2);
             printf("Você saiu do jogo.\n");
             screenDestroy();
-            keyboardDestroy();
             exit(0);
         }
 
@@ -253,23 +220,18 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
     }
 
     screenClear();
-    desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
-    free(exibicao);
-
+    
     if (strchr(exibicao, '_') == NULL) {
-        screenClear();
-        screenInit(0);
-        screenDrawBorders();
+        screenInit(1);
         screenGotoxy(30, MAXY - 20);
         printf("Continue assim!👏");
         jogo->vitorias++;
         return 1;
     } else {
-        screenClear();
-        screenInit(0);
-        screenDrawBorders();
+        screenInit(1);
         screenGotoxy(28, MAXY - 20);
         printf("Vá estudar, viu?! 🫨🩻");
         return -1;
     }
+    free(exibicao);
 }

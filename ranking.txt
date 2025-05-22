@@ -1,18 +1,3 @@
 laura 1
 cata 1
-lucas 1
-
-lula 1
-tais 0
-igor 0
-CAT 0
-CAT 0
-teste 0
-a 0
-testando 0
-centralizar 0
-00 0
-11 0
-33 0
-555 0
-123 0
+3 1

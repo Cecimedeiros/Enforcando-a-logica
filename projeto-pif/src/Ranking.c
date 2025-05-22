@@ -2,13 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/Ranking.h"
-#include "../include/Keyboard.h"
 #include "../include/Screen.h"
 
-
 int exibir_menu() {
-    screenInit(0);
-    screenDrawBorders();
+    screenInit(1);
 
     int largura_tela = 80; 
     int centro = largura_tela / 2;
@@ -34,24 +31,33 @@ int exibir_menu() {
 }
 
 void salvar_pontuacao(char nome[], int pontos) {
+
+    int largura_tela = 80; 
+    int centro = largura_tela / 2;
+
     FILE *arquivo = fopen("ranking.txt", "a");
     if (arquivo != NULL) {
         fprintf(arquivo, "%s %d\n", nome, pontos);
         fclose(arquivo);
     } else {
+        screenGotoxy(centro - 9, 12);
         printf("Erro ao salvar pontuação!\n");
     }
 }
 
 void exibir_ranking() {
-    screenClear();
-    screenInit(0);
-    screenDrawBorders();
-    char* nomearq = "ranking.txt";
-    FILE *arquivo = fopen(nomearq, "r");
+    screenInit(1);
+    
+    int largura_tela = 80; 
+    int centro = largura_tela / 2;
+    int linha = 6;
+
+    FILE *arquivo = fopen("ranking.txt", "r");
     
     if (arquivo == NULL) {
+        screenGotoxy(centro - 9, 12);
         printf("Ranking ainda não disponível.\n");
+        screenGotoxy(centro - 17, 18);
         printf("\n➡️ Pressione ENTER para continuar...");
         getchar(); 
         getchar();
@@ -61,10 +67,6 @@ void exibir_ranking() {
     Jogador jogador;
     int entrou = 0;
 
-    int largura_tela = 80; 
-    int centro = largura_tela / 2;
-    int linha = 6;
-    
     screenGotoxy(centro - 12, 4);
     printf("===== 🏆 RANKING 🏆 =====");
     

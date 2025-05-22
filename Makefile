@@ -1,12 +1,12 @@
 # Makefile do projeto Enforcando a Lógica
 
 # Nome do executável
-EXEC = Enforcando-a-logica
+EXEC = jogo
 
 # Compilador
 CC = gcc
 
-# Diretórios (corrigido para subpasta projeto-pif)
+# Diretórios
 SRC_DIR = projeto-pif/src
 BUILD_DIR = projeto-pif/build
 INCLUDE_DIR = projeto-pif/include
