@@ -5,16 +5,12 @@
 #include "../include/Forca.h"
 #include "../include/Timer.h"
 #include "../include/Screen.h"
-#include "../include/Keyboard.h"
 #include "../include/Ranking.h"
 
 #define MAX_FRASES 100
 
 int main() {
-    #ifdef _WIN32
-    system("chcp 65001 > nul" );
-    #endif
-    
+
     screenSetColor(YELLOW, BLACK);
 
     srand(time(NULL));
@@ -51,38 +47,39 @@ int main() {
 
                 int largura_tela = 80; 
                 int centro = largura_tela / 2;
+                char resposta;
 
                 screenGotoxy(centro - 10, 18);
                 printf("Digite seu nome: ");
                 scanf("%s", nome);
 
-                int indice = rand() % qtd_frases;
-                char* frase_original = originais[indice];
-                char* frase_equivalente = equivalentes[indice];
+                do{
+                    int indice = rand() % qtd_frases;
+                    char* frase_original = originais[indice];
+                    char* frase_equivalente = equivalentes[indice];
 
-                
-                int resultado = jogar_partida(frase_equivalente, frase_original, &jogo);
-                int x_frase = (MAXX - strlen(frase_equivalente)) / 2;
-                int y_frase = MAXY - 14;
+                    int resultado = jogar_partida(frase_equivalente, frase_original, &jogo);
+                    int x_frase = (MAXX - strlen(frase_equivalente)) / 2;
+                    int y_frase = MAXY - 14;
 
-                if (resultado == 1) {
-                    screenGotoxy(20, MAXY - 14);
-                    printf("🏆 Você acertou a frase equivalente! 🏆");
-                    pontos +=1;          
-                       
-                } else {
-                    screenGotoxy(x_frase, y_frase);
-                    printf("A proposição correta era: %s", frase_equivalente);
-                    pontos= 0;
-                }
-                salvar_pontuacao(nome,pontos);   
-                screenGotoxy(20, MAXY - 6);
-                printf("🔎 Deseja jogar novamente? (S/N): ");
-                char resposta;
-                scanf(" %c", &resposta);
-                if (toupper(resposta) != 'S') {
-                    sair = 1;
-                }
+                    if (resultado == 1) {
+                        screenGotoxy(20, MAXY - 14);
+                        printf("🏆 Você acertou a frase equivalente! 🏆");
+                        pontos +=1;          
+                        
+                    } else {
+                        screenGotoxy(x_frase, y_frase);
+                        printf("A proposição correta era: %s", frase_equivalente);
+                        
+                    }
+                      
+                    screenGotoxy(20, MAXY - 6);
+                    printf("🔎 Deseja jogar novamente? (S/N): ");
+                    scanf(" %c", &resposta);
+
+                } while (toupper(resposta)== 'S');
+
+                salvar_pontuacao(nome,pontos); 
                 break;
             }
             case 2:{
@@ -94,7 +91,13 @@ int main() {
                 break;
             }
             default:{
-                printf("Opção inválida!\n");
+                int largura_tela = 80; 
+                int centro = largura_tela / 2;
+                
+                screenGotoxy(centro - 27, 20);
+                printf("❌ Opção inválida! Pressione ENTER para continuar.\n");
+                getchar();
+                getchar();
                 break;
             }
         }

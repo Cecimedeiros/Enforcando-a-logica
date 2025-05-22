@@ -1,7 +1,12 @@
 laura 1
 cata 1
-lucas 1
-
-lula 1
-tais 0
-igor 0
+iza 6
+draculaura 0
+diego 3
+flavia 3
+gu 2
+ta 1
+h 0
+ty 1
+e 2
+f 1

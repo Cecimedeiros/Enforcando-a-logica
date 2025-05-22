@@ -17,19 +17,20 @@
    4. Compile com o Makefile:
            make
    5. Execute o programa:
-           ./Enforcando-a-logica
+           ./projeto-pif/build/jogo
 
         
 
 **👩‍💻 Como Jogar?**
 
-  Para jogar, você irá acessar o jogo por meio das instruções acima. No início, será apresentada a frase original e, então, o usuário digitará a frase equivalente. Dessa forma, o objetivo do jogo é descobrir a equivalência lógica (em linguagem natural) da frase original. Para isso, o usuário praticará seus conhecimentos nesse assunto. 
-  Ademais, o jogador tem direito a uma dica para auxiliar na resolução. A cada tentativa errada, uma parte do corpo do boneco é direcionada à forca, totalizando seis chances. Se o jogador acertar a equivalência, vencerá a rodada e poderá decidir se encerra o programa ou continua a jogar.
+  Para acessar o jogo, siga as instruções acima. No início, será apresentada a frase original e, então, o usuário terá que digitar a frase equivalente em um tempo máximo de 2 minutos. Dessa forma, o objetivo do jogo é descobrir a equivalência lógica (em linguagem natural) da frase original. 
+  Para fins educativos, aconselhamos que o jogador tente converter a sentença dada para linguagem simbólica e, ao descobrir, digite a frase equivalente no terminal. 
+  Ademais, a cada tentativa errada, uma parte do corpo do boneco é direcionada à forca, totalizando seis chances. Se o jogador acertar a equivalência, vencerá a rodada e poderá decidir se encerra o programa ou continua a jogar, podendo acumular seus pontos.
 
 **⚠️ Regras:**
 
     1. O jogador tem seis tentativas de acertar 1 equivalência lógica.
-    2. O jogador pode usar apenas uma dica para a resolução da equivalência.
+    2. O jogador tem 2 minutos (120 segundos) para acertar a equivalência lógica.
             
 ## Informações da Disciplina acadêmica
 

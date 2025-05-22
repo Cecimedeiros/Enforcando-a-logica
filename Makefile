@@ -1,7 +1,7 @@
 # Makefile do projeto Enforcando a Lógica
 
 # Nome do executável
-EXEC = Enforcando-a-logica
+EXEC = jogo
 
 # Compilador
 CC = gcc
@@ -27,6 +27,7 @@ all: $(TARGET)
 $(TARGET): $(SRCS)
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) $^ -o $@
+	chmod +x $@
 
 # Limpeza
 clean:

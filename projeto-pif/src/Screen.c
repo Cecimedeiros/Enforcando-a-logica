@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 void screenDrawBorders() 
 {
     char hbc = BOX_HLINE;
@@ -62,7 +61,6 @@ void screenDestroy()
 }
 
 void screenPrintCenter(const char* text) {
-    int length = strlen(text);
     printf("%s", text);
 }
 
