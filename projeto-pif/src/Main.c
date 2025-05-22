@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
+#include <locale.h>  
 #include "../include/Forca.h"
 #include "../include/Timer.h"
 #include "../include/Screen.h"
@@ -11,9 +12,12 @@
 #define MAX_FRASES 100
 
 int main() {
+    setlocale(LC_ALL, "");  
+
     #ifdef _WIN32
-    system("chcp 65001 > nul" );
+    system("chcp 65001 > nul");
     #endif
+
     
     screenSetColor(YELLOW, BLACK);
 
