@@ -1,7 +1,7 @@
-gugu 0
-judite 1
-lira 1
-catar 0
-fefe 1
-
+laura 1
+cata 1
+iza 6
+draculaura 0
+diego 3
+flavia 3
 
