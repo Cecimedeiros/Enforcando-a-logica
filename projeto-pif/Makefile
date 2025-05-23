@@ -1,22 +1,20 @@
-<<<<<<< HEAD
-# Makefile do projeto Enforcando a Lógica
-
 # Nome do executável
 EXEC = jogo
 
 # Compilador
 CC = gcc
 
-# Diretórios (corrigido para subpasta projeto-pif)
-SRC_DIR = projeto-pif/src
-BUILD_DIR = projeto-pif/build
-INCLUDE_DIR = projeto-pif/include
+# Diretórios
+SRC_DIR = src
+BUILD_DIR = build
+INCLUDE_DIR = include
 
 # Flags de compilação
 CFLAGS = -Wall -g -I$(INCLUDE_DIR)
 
-# Arquivos fonte
+# Arquivos fonte e headers
 SRCS = $(wildcard $(SRC_DIR)/*.c)
+HDRS = $(wildcard $(INCLUDE_DIR)/*.h)
 
 # Caminho completo para o executável
 TARGET = $(BUILD_DIR)/$(EXEC)
@@ -24,8 +22,9 @@ TARGET = $(BUILD_DIR)/$(EXEC)
 # Regra padrão
 all: $(TARGET)
 
-# Compilação
-$(TARGET): $(SRCS)
+# Compilação (inclui headers como dependência)
+$(TARGET): $(SRCS) $(HDRS)
+	@echo ">>> Recompilando o jogo..."
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) $^ -o $@
 	chmod +x $@

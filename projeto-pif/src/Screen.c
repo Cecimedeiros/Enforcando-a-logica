@@ -61,6 +61,7 @@ void screenDestroy()
 }
 
 void screenPrintCenter(const char* text) {
+    //int length = strlen(text);
     printf("%s", text);
 }
 

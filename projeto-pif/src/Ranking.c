@@ -105,7 +105,6 @@ void exibir_ranking() {
     int linha = 6;
 
     FILE *arquivo = fopen("ranking.txt", "r");
-    
     if (arquivo == NULL) {
         screenGotoxy(centro - 9, 12);
         printf("Ranking ainda não disponível.\n");

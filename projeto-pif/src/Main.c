@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -11,7 +10,6 @@
 #define MAX_FRASES 100
 
 int main() {
-
     screenSetColor(YELLOW, BLACK);
 
     srand(time(NULL));
