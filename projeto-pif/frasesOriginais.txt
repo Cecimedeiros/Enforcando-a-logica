@@ -1,0 +1,25 @@
+Se chover, então levarei guarda-chuva
+Não chover ou levarei guarda-chuva
+Se não estudar, então não será aprovado
+Estudar ou não será aprovado
+Não estarei em casa ou não abrirei a porta
+Se estiver em casa, então não abrirei a porta
+Se for feriado, então não haverá aula
+Não for feriado ou não haverá aula
+Se não for verdadeiro, então não é confiável
+For verdadeiro e é confiável
+Se chover, então levo guarda-chuva
+Se estudar, então passará na prova
+Se beber, então não dirija
+Se estiver cansado, então descanse
+Se faltar, então será penalizado
+Não estude ou não vá mal na prova
+Se correr, então chega a tempo
+Se mentir, então perderá a confiança
+Se for à academia, então ficará mais saudável
+Se não chover, então sairemos
+João é honesto ou Pedro é confiável
+João é forte e disciplinado
+Se estudar e praticar, então será aprovado
+Se acordar cedo, então chegará no horário
+Se for feriado, então o comércio estará fechado

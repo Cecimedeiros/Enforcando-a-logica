@@ -150,4 +150,3 @@ void exibir_ranking() {
     getchar(); 
     getchar(); 
 }
-

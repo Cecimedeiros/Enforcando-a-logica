@@ -84,5 +84,3 @@ void screenSetColor( screenColor fg, screenColor bg)
 
     printf("%s%s%d;%dm", ESC, atr, fg+30, bg+40);
 }
-
-

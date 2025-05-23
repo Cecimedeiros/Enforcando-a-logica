@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Makefile do projeto Enforcando a Lógica
 
 # Nome do executável
