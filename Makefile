@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Makefile do projeto Enforcando a Lógica
 
 # Nome do executável
@@ -6,7 +7,7 @@ EXEC = jogo
 # Compilador
 CC = gcc
 
-# Diretórios
+# Diretórios (corrigido para subpasta projeto-pif)
 SRC_DIR = projeto-pif/src
 BUILD_DIR = projeto-pif/build
 INCLUDE_DIR = projeto-pif/include
@@ -27,6 +28,7 @@ all: $(TARGET)
 $(TARGET): $(SRCS)
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) $^ -o $@
+	chmod +x $@
 
 # Limpeza
 clean:
