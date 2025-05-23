@@ -6,24 +6,24 @@
 
 **⚙️ Instruções para compilar e executar o jogo:**
 
-   1. Verfique se o seu sistema operacional é Linux ou macOS;\
+   1. Verfique se o seu sistema operacional é Linux ou macOS;
       
       obs: Se for Windows, será necessário instalar WSL(Windos Subsystem for Linux) e o Ubuntu;
 
-   2. Verifique, com o comando abaixo, se o compilador 'gcc' está instalado (Caso não esteja, é necessário instalar):\
+   2. Verifique, com o comando abaixo, se o compilador 'gcc' está instalado (Caso não esteja, é necessário instalar):
 
           gcc --version.
 
-   3. Clone o repositório e entre na pasta:\
+   3. Clone o repositório e entre na pasta:
 
            git clone https://github.com/Cecimedeiros/Enforcando-a-logica.git
            cd Enforcando-a-logica
 
-   4. Compile com o Makefile:\
+   4. Compile com o Makefile:
           
           make
 
-   5. Execute o programa:\
+   5. Execute o programa:
 
            ./projeto-pif/build/jogo
 
@@ -42,7 +42,7 @@
             
 ## Informações da Disciplina acadêmica
 
-🔹Nome da disciplina: Programação Imperativa e Funcional - 2025.1.\
+🔹Nome da disciplina: Programação Imperativa e Funcional - 2025.1.
 🔹Nome da instituição de ensino: CESAR School.
 
 ## 👥 Equipe
