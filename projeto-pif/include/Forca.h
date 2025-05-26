@@ -5,6 +5,8 @@ typedef struct {
     int tentativas;
     int acertos;
     int vitorias;
+    int partidas_concluidas;
+    char nome[50];
 } Jogo;
 
 #include <stdio.h>

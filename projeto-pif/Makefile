@@ -1,3 +1,5 @@
+#Makefile do jogo "Enforcando a logica"
+
 # Nome do executável
 EXEC = jogo
 
@@ -22,9 +24,8 @@ TARGET = $(BUILD_DIR)/$(EXEC)
 # Regra padrão
 all: $(TARGET)
 
-# Compilação (inclui headers como dependência)
+# Compilação
 $(TARGET): $(SRCS) $(HDRS)
-	@echo ">>> Recompilando o jogo..."
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) $^ -o $@
 	chmod +x $@

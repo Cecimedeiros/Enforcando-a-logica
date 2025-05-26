@@ -6,6 +6,7 @@
 #include "../include/Timer.h"
 #include "../include/Screen.h"
 #include "../include/Ranking.h"
+#include "../include/Menu.h"
 
 #define MAX_FRASES 100
 
@@ -31,6 +32,7 @@ int main() {
     Jogo jogo;
     jogo.vitorias = 0;
     jogo.tentativas = 0;
+    jogo.partidas_concluidas=0;
 
     while (!sair) {
         
@@ -41,16 +43,22 @@ int main() {
 
         switch(opcao) {
             case 1: {
-                char nome[50];
-                int pontos = 0;
-
+                
                 int largura_tela = 80; 
                 int centro = largura_tela / 2;
+
+                char nome[50];
+                int pontos = 0;
+                
+                jogo.vitorias = 0;
+                jogo.partidas_concluidas = 0;
                 char resposta;
 
                 screenGotoxy(centro - 10, 18);
                 printf("Digite seu nome: ");
                 scanf("%s", nome);
+                strcpy(jogo.nome, nome);
+
 
                 do{
                     int indice = rand() % qtd_frases;
@@ -58,17 +66,22 @@ int main() {
                     char* frase_equivalente = equivalentes[indice];
 
                     int resultado = jogar_partida(frase_equivalente, frase_original, &jogo);
-                    int x_frase = (MAXX - strlen(frase_equivalente)) / 2;
-                    int y_frase = MAXY - 14;
+                    jogo.partidas_concluidas++;
 
                     if (resultado == 1) {
-                        screenGotoxy(20, MAXY - 14);
-                        printf("🏆 Você acertou a frase equivalente! 🏆");
-                        pontos +=1;          
-                        
+                        const char* msg_vitoria = "🏆 Você acertou a frase equivalente! 🏆";
+                        int x_vitoria = (MAXX - strlen(msg_vitoria)) / 2;
+                        screenGotoxy(x_vitoria, MAXY - 14);
+                        printf("%s", msg_vitoria);
                     } else {
-                        screenGotoxy(x_frase, y_frase);
-                        printf("A proposição correta era: %s", frase_equivalente);
+                        int x_titulo = (MAXX - strlen("A proposição correta era:")) / 2;
+                        screenGotoxy(x_titulo, MAXY - 16);
+                        printf("A proposição correta era:");
+
+                        int x_frase = (MAXX - strlen(frase_equivalente)) / 2;
+                        screenGotoxy(x_frase, MAXY - 14);
+                        printf("%s", frase_equivalente);
+                        
                         
                     }
                       

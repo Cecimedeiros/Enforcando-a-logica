@@ -1,7 +1,5 @@
-laura 1
-cata 1
-iza 6
-draculaura 0
-diego 3
-flavia 3
-
+bel 5
+allana 4
+lulu 4
+joca 1
+teste 0

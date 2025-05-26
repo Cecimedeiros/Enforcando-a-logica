@@ -2,6 +2,7 @@
 #include "../include/Normalizador.h"
 #include "../include/Timer.h"
 #include "../include/Screen.h"
+#include "../include/Ranking.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -86,16 +87,19 @@ void desenhar_jogo(const char* exibicao, int tentativas, const char* erradas, in
     }
     
 }
-
 int jogar_partida(const char* frase_equivalente, const char* frase_original, Jogo* jogo) {
     
-    int tamanho = strlen(frase_equivalente);
+    char* frase_limpa = strdup(frase_equivalente);
+    frase_limpa[strcspn(frase_limpa, "\r\n")] = '\0';
+
+
+    int tamanho = strlen(frase_limpa);
     char* exibicao = malloc(tamanho + 1);
 
     int total_para_acertar = 0;
     for (int i = 0; i < tamanho; i++) {
-        if (frase_equivalente[i] == ' ' || frase_equivalente[i] == ',' || frase_equivalente[i] == '.' || frase_equivalente[i] == '-') {
-            exibicao[i] = frase_equivalente[i];
+        if (frase_limpa[i] == ' ' || frase_limpa[i] == ',' || frase_limpa[i] == '.' || frase_limpa[i] == '-') {
+            exibicao[i] = frase_limpa[i];
         } else {
             exibicao[i] = '_';
             total_para_acertar++;
@@ -106,12 +110,13 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
     jogo->tentativas = 0;
     jogo->acertos = 0;
     char erradas[50] = "";
-    
-    timerInit(120000);
-    screenInit(1);       
+
+    int tempo_inicial = (jogo->partidas_concluidas > 2) ? 60000 : 120000;
+    timerInit(tempo_inicial);
+    screenInit(1);
+
     while (jogo->tentativas < MAX_ATTEMPTS && jogo->acertos < total_para_acertar) {
-        
-        int largura_tela = 80; 
+        int largura_tela = 80;
         int centro = largura_tela / 2;
 
         screenGotoxy(centro - 15, 1);
@@ -119,32 +124,35 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
 
         screenGotoxy(centro - 28, 2);
         printf("Acerte a frase equivalente da original jogando forca!");
-         
+
         screenGotoxy(centro - (strlen(frase_original) / 2), 3);
         printf("Frase original: %s", frase_original);
 
-        int tempo_restante = 120000 - getTimeDiff();
+        int tempo_restante = tempo_inicial - getTimeDiff();
         screenGotoxy(centro - 15, 4);
         printf("⏱ Tempo restante: %d segundos", tempo_restante / 1000);
-        
+
         desenhar_jogo(exibicao, jogo->tentativas, erradas, jogo->vitorias);
 
         if (timerTimeOver()) {
-            screenInit(1);       
+            screenInit(1);
             screenGotoxy(30, MAXY - 20);
             printf("⏰ O tempo acabou!");
+            free(frase_limpa);
             free(exibicao);
-            return -1; 
+            return -1;
         }
 
         char tentativa;
-        screenGotoxy(10, MAXY - 3);  
+        screenGotoxy(10, MAXY - 3);
         printf("Digite uma letra (ou aperte '.' para sair): ");
         scanf(" %c", &tentativa);
 
         if (tentativa == '.') {
             screenDestroy();
-            exit(0); 
+            free(frase_limpa);
+            free(exibicao);
+            exit(0);
         }
 
         tentativa = tolower(tentativa);
@@ -167,8 +175,8 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
 
         int acertou = 0;
         for (int i = 0; i < tamanho; i++) {
-            if (remover_acento(tolower(frase_equivalente[i])) == tentativa_normalizada && exibicao[i] == '_') {
-                exibicao[i] = frase_equivalente[i];
+            if (remover_acento(tolower(frase_limpa[i])) == tentativa_normalizada && exibicao[i] == '_') {
+                exibicao[i] = frase_limpa[i];
                 jogo->acertos++;
                 acertou = 1;
             }
@@ -181,24 +189,23 @@ int jogar_partida(const char* frase_equivalente, const char* frase_original, Jog
             jogo->tentativas++;
         }
     }
-    
-    screenClear();
-    free(exibicao);
 
+    screenInit(1);
+    screenGotoxy(20, MAXY - 20);
     if (jogo->acertos == total_para_acertar) {
-
-        screenInit(1);       
-        screenGotoxy(30, MAXY - 20);
-        printf("Continue assim!👏");
-        jogo->vitorias++;
-
-        return 1;
+        printf("🎉 Parabéns! Você acertou a frase!");
+        jogo->vitorias++; 
+        salvar_pontuacao(jogo->nome, 1); 
     } else {
+        const char* msg_derrota = "💀 Você perdeu!";
+        int x_derrota = (MAXX - strlen(msg_derrota)) / 2;
+        screenGotoxy(x_derrota, MAXY - 20);
+        printf("%s", msg_derrota);
 
-        screenInit(1); 
-        screenGotoxy(28, MAXY - 20);
-        printf("Vá estudar, viu?! 🫨🩻");
-        return -1;
     }
 
+    free(frase_limpa);
+    free(exibicao);
+    return 0;
 }
+

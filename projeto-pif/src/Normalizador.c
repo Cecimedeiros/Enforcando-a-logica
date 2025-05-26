@@ -25,32 +25,6 @@ char remover_acento(char c) {
     }
 }
 
-char remover_acento_utf8(unsigned char c1, unsigned char c2) {
-    if (c1 == 0xC3) {
-        switch (c2) {
-            // A e á à â ã ä
-            case 0xA1: case 0xA0: case 0xA2: case 0xA3: case 0xA4:
-                return 'a';
-            // E é è ê ë
-            case 0xA9: case 0xA8: case 0xAA: case 0xAB:
-                return 'e';
-            // I í ì î ï
-            case 0xAD: case 0xAC: case 0xAE: case 0xAF:
-                return 'i';
-            // O ó ò ô õ ö
-            case 0xB3: case 0xB2: case 0xB4: case 0xB5: case 0xB6:
-                return 'o';
-            // U ú ù û ü
-            case 0xBA: case 0xB9: case 0xBB: case 0xBC:
-                return 'u';
-            // Ç ç
-            case 0xA7:
-                return 'c';
-        }
-    }
-    return 0; 
-}
-
 void normalizar(const char* entrada, char* saida) {
     int i = 0;
     while (entrada[i]) {

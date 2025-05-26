@@ -1,25 +1,35 @@
-Se não chover, então levarei guarda-chuva
-Se chover, então levarei guarda-chuva
-Se estudar, então será aprovado
-Se não for aprovado, então estudou
-Se estiver em casa, então não abrirei a porta
-Não estarei em casa ou não abrirei a porta
-Não for feriado ou não haverá aula
-Se for feriado, então não haverá aula
-Se for confiável, então é verdadeiro
-Se mentir, então não é confiável
-Se não levar guarda-chuva, então não choveu
-Se não passar na prova, então não estudou
-Não beber ou não dirija
-Se não descansar, então não estava cansado
-Se não for penalizado, então não faltou
-Se estudar, então não irá mal na prova
-Não correr ou chega a tempo
-Não mentir ou perderá a confiança
-Se não ficar mais saudável, então não foi à academia
-Se não sairmos, então choveu
-Pedro é confiável ou João é honesto
-Disciplinado e João é forte
-Se não for aprovado, então não estudou ou não praticou
-Não acordar cedo ou chegará no horário
-Se o comércio não estiver fechado, então não é feriado
+Se nao chego no horario, entao nao acordei cedo
+Se nao tiro nota boa, entao nao estudei
+Se nao fico forte, entao nao treinei
+Se nao assisto serie, entao nao tenho internet
+Se nao entendo a materia, entao nao li o livro
+Eu nao corro ou eu suo
+Ela nao canta ou todos escutam
+Nao jogo muito ou fico cansado
+Eu nao estudo ou eu passo
+Eu nao como ou fico feliz
+Eu nao estudo ou nao passo
+Ela nao canta ou nao danca
+Nao chove ou nao faz frio
+Nao acordo cedo ou nao tomo banho
+Eu nao treino ou nao sigo dieta
+Eu nao jogo e nao assisto TV
+Ela nao corre e nao caminha
+O celular nao toca e nao vibra
+Nao tem pizza e nao tem lasanha
+Ele nao estuda e nao trabalha
+Eu estudo e nao passo
+Eu treino e nao fico forte
+Chove e nao uso guarda-chuva
+Corro e nao me canso
+Como e nao fico feliz
+Eu estudo
+Ele corre
+A luz esta acesa
+Eu treino
+Chove
+Eu estudo
+Ela canta
+A TV liga
+Eu acordo cedo
+Ele trabalha

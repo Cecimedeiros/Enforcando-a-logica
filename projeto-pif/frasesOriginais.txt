@@ -1,25 +1,35 @@
-Se chover, então levarei guarda-chuva
-Não chover ou levarei guarda-chuva
-Se não estudar, então não será aprovado
-Estudar ou não será aprovado
-Não estarei em casa ou não abrirei a porta
-Se estiver em casa, então não abrirei a porta
-Se for feriado, então não haverá aula
-Não for feriado ou não haverá aula
-Se não for verdadeiro, então não é confiável
-For verdadeiro e é confiável
-Se chover, então levo guarda-chuva
-Se estudar, então passará na prova
-Se beber, então não dirija
-Se estiver cansado, então descanse
-Se faltar, então será penalizado
-Não estude ou não vá mal na prova
-Se correr, então chega a tempo
-Se mentir, então perderá a confiança
-Se for à academia, então ficará mais saudável
-Se não chover, então sairemos
-João é honesto ou Pedro é confiável
-João é forte e disciplinado
-Se estudar e praticar, então será aprovado
-Se acordar cedo, então chegará no horário
-Se for feriado, então o comércio estará fechado
+Se acordo cedo, chego no horario
+Se estudo, tiro nota boa
+Se treino, fico forte
+Se tenho internet, assisto serie
+Se leio o livro, entendo a materia
+Se eu corro, eu suo
+Se ela canta, todos escutam
+Se jogo muito, fico cansado
+Se estudo, eu passo
+Se eu como, fico feliz
+Nao e verdade que eu estudo e eu passo
+Nao acontece que ela canta e danca
+E falso que chove e faz frio
+Nao e verdade que acordo cedo e tomo banho
+Nao acontece que eu treino e sigo dieta
+Nao e verdade que eu jogo ou assisto TV
+E falso que ela corre ou caminha
+Nao acontece que o celular toca ou vibra
+E falso que tem pizza ou lasanha
+Nao e verdade que ele estuda ou trabalha
+Nao e verdade que se eu estudo, eu passo
+E falso que se treino, fico forte
+Nao acontece que se chove, uso guarda-chuva
+E falso que se corro, me canso
+Nao e verdade que se como, fico feliz
+Eu estudo e eu estudo ou eu descanso
+Ele corre e ele corre ou caminha
+A luz esta acesa e a luz esta acesa ou a porta esta fechada
+Eu treino e eu treino ou fico em casa
+Chove e chove ou faz calor
+Eu estudo ou eu estudo e eu descanso
+Ela canta ou ela canta e toca
+A TV liga ou a TV liga e a luz pisca
+Eu acordo cedo ou eu acordo cedo e tomo cafe
+Ele trabalha ou ele trabalha e estuda
